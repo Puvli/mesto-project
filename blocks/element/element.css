@@ -1,0 +1,9 @@
+.element {
+    margin: 0;
+    padding: 0;
+    max-height: 361px;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    gap: 0;
+    justify-self: center;
+  }

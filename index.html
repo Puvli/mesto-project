@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="pages/index.css" />
+    <title>Проект Место</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="images/logo.svg" alt="Место" />
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__page">
+          <img
+            class="profile__avatar"
+            src="images/image.jpg"
+            alt="Жак-Ив Кусто"
+          />
+          <div class="profile__info">
+            <h1 class="profile__info-name">
+              Жак-Ив Кусто
+              <button type="button" class="profile__info-button"></button>
+            </h1>
+            <p class="profile__info-activity">Исследователь океана</p>
+          </div>
+        </div>
+
+        <button type="button" class="profile__add-button"></button>
+      </section>
+      <section class="popup">
+        <div class="popup__container">
+          <img class="popup__close-button" src="images/Close Icon.svg" />
+          <form class="popup__form">
+            <h2 class="popup__heading">Редактировать профиль</h2>
+            <fieldset class="popup__user-info">
+              <input
+                type="text"
+                class="popup__user-name"
+                name="name"
+                placeholder="Жак-Ив Кусто"
+              />
+              <input
+                type="text"
+                class="popup__user-activity"
+                name="activity"
+                placeholder="Исследователь океана"
+              />
+            </fieldset>
+            <button type="button" class="popup__form-button">Сохранить</button>
+          </form>
+        </div>
+      </section>
+      <ul class="elements">
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1088404-unsplash.jpg"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Карачаевск</h1>
+            <div class="element__feedback-like"></div>
+          </div>
+        </li>
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1404681-unsplash.png"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Гора Эльбрус</h1>
+            <div class="element__feedback-like"></div>
+          </div>
+        </li>
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1556355-unsplash.png"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Домбай</h1>
+            <div class="element__feedback-like"></div>
+          </div>
+        </li>
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1404681-unsplash.png"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Гора Эльбрус</h1>
+            <div class="element__feedback-like"></div>
+          </div>
+        </li>
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1556355-unsplash.png"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Домбай</h1>
+            <button type="button" class="element__feedback-like"></button>
+          </div>
+        </li>
+        <li class="element">
+          <img
+            class="element__img"
+            src="/images/kirill-pershin-1088404-unsplash.jpg"
+            alt="Карачаевск"
+          />
+          <div class="element__feedback">
+            <h1 class="element__feedback-heading">Карачаево-Черкессия</h1>
+            <div class="element__feedback-like"></div>
+          </div>
+        </li>
+      </ul>
+    </main>
+    <footer class="footer">&copy; 2022 Mesto Russia</footer>
+  </body>
+</html>

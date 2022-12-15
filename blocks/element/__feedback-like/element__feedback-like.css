@@ -1,0 +1,15 @@
+.element__feedback-like {
+    background-image: url(../../../images/Like.svg);
+    background-repeat: no-repeat;
+    width: 22px;
+    height: 19px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .element__feedback-like:active {
+  }
+  
+  .element__feedback-like:hover {
+    opacity: 0.5;
+  }
