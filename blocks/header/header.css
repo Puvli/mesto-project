@@ -7,10 +7,6 @@
   padding-bottom: 40px;
   border-bottom: 1px solid #545454;
 }
-/* .header__logo {
-  height: 33px;
-  width: 142px;
-} */
 
 @media screen and (max-width: 320px) {
   .header {
@@ -18,11 +14,3 @@
     padding-bottom: 31.6px;
   }
 }
-
-/* @media screen and (max-width: 320px) {
-  .header__logo {
-    width: 103.74px;
-    height: 24.4px;
-    margin-left: 27px;
-  }
-} */
