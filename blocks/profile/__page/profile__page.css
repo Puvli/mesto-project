@@ -3,6 +3,12 @@
   gap: 30px;
 }
 
+@media screen and (max-width: 355px) {
+  .profile__page {
+    gap: 0;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile__page {
     flex-direction: column;

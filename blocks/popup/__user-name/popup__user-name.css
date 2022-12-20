@@ -1,7 +1,9 @@
 .popup__user-name {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  width: 353px;
+  /* max-width: 353px; */
+  max-width: 358px;
+  width: 100%;
   padding: 0;
   margin: 0 auto;
   color: #000000;
@@ -19,6 +21,6 @@
   .popup__user-name {
     line-height: 16px;
     width: 238px;
-    padding-bottom: 10px;
+    padding-bottom: 7px;
   }
 }
