@@ -5,6 +5,7 @@
   height: 19px;
   border: none;
   cursor: pointer;
+  background-color: white;
 }
 
 .element__feedback-like:hover {
