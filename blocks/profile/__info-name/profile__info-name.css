@@ -10,6 +10,7 @@
   white-space: nowrap;
   align-self: baseline;
   overflow: hidden;
+  width: 300px;
 }
 
 /* @media screen and (min-width: 1280px) {
@@ -21,6 +22,7 @@
 @media screen and (max-width: 600px) {
   .profile__info-name {
     font-size: 18px;
+    width: 126px;
   }
 }
 
@@ -29,5 +31,6 @@
     font-size: 28px;
     line-height: 33px;
     text-align: center;
+    width: 196px;
   }
 }
