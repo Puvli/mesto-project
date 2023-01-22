@@ -1,3 +1,18 @@
+let addNewCard = document.querySelector(".card-popup");
+
+// + кнопка добавления новой карточки
+let addBtn = document
+  .querySelector(".profile__add-button")
+  .addEventListener("click", function () {
+    addNewCard.classList.add("card-popup_opened");
+  });
+//закрывающая кнопка попапа добавления новой карточки
+let closeNew = document
+  .querySelector(".card-popup__close-button")
+  .addEventListener("click", function () {
+    addNewCard.classList.remove("card-popup_opened");
+  });
+
 let popup = document.querySelector(".popup");
 // let formName = document.querySelector('.popup__user-name').textContent;
 
@@ -26,9 +41,9 @@ const formElement = document.querySelector(".popup__form");
 
 const nameInput = document.querySelector(".popup__user-name");
 // Воспользуйтесь инструментом .querySelector()
-nameInput.value = 'Жак-Ив Кусто';
+nameInput.value = "Жак-Ив Кусто";
 const jobInput = document.querySelector(".popup__user-activity");
-jobInput.value = 'Исследователь океана';
+jobInput.value = "Исследователь океана";
 // Воспользуйтесь инструментом .querySelector()
 
 // Обработчик «отправки» формы, хотя пока

@@ -1,0 +1,33 @@
+.card-popup__close-button {
+    top: -38px;
+    left: 438px;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    background: url(../../../images/Close-Icon.svg);
+    background-position: center;
+    border: none;
+    /* background-size: 32px 32px; */
+  }
+  
+  .card-popup__close-button:hover {
+    opacity: 0.6;
+  }
+  
+  @media screen and (max-width: 540px) {
+    .card-popup__close-button {
+      left: 255px;
+    }
+  }
+  
+  @media screen and (max-width: 320px) {
+    .card-popup__close-button {
+      top: -34px;
+      left: 265px;
+      width: 20px;
+      height: 20px;
+      background-size: 20px 20px;
+    }
+  }
+  

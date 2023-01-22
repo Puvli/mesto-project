@@ -1,0 +1,9 @@
+.card-popup__container {
+    /* background-color: white; */
+    color: black;
+    /* width: 430px; */
+    /* height: 330px; */
+    /* border-radius: 10px; */
+    position: relative;
+    box-shadow: 0px 0px 25px 0px #00000026;
+  }

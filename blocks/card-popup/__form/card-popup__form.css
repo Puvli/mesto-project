@@ -1,0 +1,13 @@
+.card-popup__form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+    width: 430px;
+  }
+
+  @media screen and (max-width: 540px) {
+    .card-popup__form {
+      width: 290px;
+    }
+  }
