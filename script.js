@@ -25,8 +25,6 @@ const initialCards = [
   },
 ];
 
-// const addNewCard = document.querySelector(".card-popup");
-let newLikeButtons = 0;
 const popup = document.querySelector(".popup");
 
 //закрытие попапа по клику крестика
@@ -82,9 +80,9 @@ const formCardElement = document.querySelector(".card-popup__form");
 const itemName = document.querySelector(".card-popup__item-name");
 const itemLink = document.querySelector(".card-popup__item-link");
 
-//================================Функция добавления карточек==============================================
+//================================Функция добавления и удаления карточек==============================================
 const newCard = document.querySelector(".elements");
-function addCardAndLike(obj) {
+function addAndDeleteCard(obj) {
   const cardTemplate = document.querySelector(".template").content;
   const template = cardTemplate.querySelector(".element").cloneNode(true);
   // const newCard = document.querySelector(".elements");
@@ -97,10 +95,15 @@ function addCardAndLike(obj) {
   likeButton.addEventListener("click", function () {
     likeButton.classList.toggle("element__feedback-like_active");
   });
+  //Удаление элементов
+  let delButton = document.querySelector(".element__bucket");
+  delButton.addEventListener("click", function () {
+    template.remove();
+  });
 }
 //добавляем карточки из массива
 for (let i = 0; i < initialCards.length; i++) {
-  addCardAndLike(initialCards[i]);
+  addAndDeleteCard(initialCards[i]);
 }
 
 //форма добавления новых карточек
@@ -111,7 +114,7 @@ function formCardHandler(evt) {
   let newObj = {};
   newObj["name"] = itemNewName;
   newObj["link"] = itemNewLink;
-  addCardAndLike(newObj);
+  addAndDeleteCard(newObj);
   addNewCard.classList.toggle("card-popup_opened");
 }
 

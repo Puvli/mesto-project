@@ -6,4 +6,5 @@
     grid-template-rows: 2fr 1fr;
     gap: 0;
     justify-self: center;
+    position: relative;
   }

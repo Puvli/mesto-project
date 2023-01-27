@@ -1,0 +1,13 @@
+.element__bucket {
+  background-image: url(../../../images/Group.svg);
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  top: 10px;
+  right: 10px;
+}
+
+.element__bucket:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
