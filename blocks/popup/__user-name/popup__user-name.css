@@ -14,7 +14,7 @@
 }
 
 .popup__user-name::placeholder {
-  color: #000000;
+  color: #c4c4c4;
 }
 
 @media screen and (max-width: 320px) {
