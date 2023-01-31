@@ -115,7 +115,7 @@ function openPictures(obj) {
   const picture = obj.querySelector(".element__img");
   // const picturePopup = document.querySelector(".picture-popup");
   const openingPicture = document.querySelector(".picture-popup__image");
-  const pictureName = document.querySelector(".element__feedback-heading");
+  const pictureName = obj.querySelector(".element__feedback-heading");
   const openingPictureName = document.querySelector(".picture-popup__name");
   picture.setAttribute("alt", pictureName.textContent);
   picture.addEventListener("click", function () {
@@ -137,15 +137,16 @@ function createCard(obj) {
   template.querySelector(".element__img").src = obj.link;
   template.querySelector(".element__feedback-heading").textContent = obj.name;
   // addCard(template, cards);
+  openPictures(template);
+  addLike(template);
+  deleteCards(template);
   return template;
 }
 
 //функция добавления новой карточки
 function addCard(card, container) {
   container.prepend(card);
-  addLike(card);
-  deleteCards(card);
-  openPictures(card);
+  // openPictures(card);
 }
 
 //добавляем карточки из массива
