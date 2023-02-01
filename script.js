@@ -36,8 +36,8 @@ function closePopup(popup) {
 }
 
 //закрытие попапа по клику крестика
-const ButtonClosePopup = document.querySelector(".popup__close-button");
-ButtonClosePopup.addEventListener("click", function () {
+const popupProfileCloseButton = document.querySelector(".popup__close-button");
+popupProfileCloseButton.addEventListener("click", function () {
   closePopup(popupProfile);
 });
 
