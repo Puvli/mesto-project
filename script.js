@@ -36,8 +36,8 @@ function closePopup(popup) {
 }
 
 //закрытие попапа по клику крестика
-const closePopupButton = document.querySelector(".popup__close-button");
-closePopupButton.addEventListener("click", function () {
+const ButtonClosePopup = document.querySelector(".popup__close-button");
+ButtonClosePopup.addEventListener("click", function () {
   closePopup(popupProfile);
 });
 
@@ -93,9 +93,9 @@ function deleteCards(temp) {
   });
 }
 
-function addLike(obj) {
+function addLike(card) {
   // =============================LIKES====================================
-  const likeButton = obj.querySelector(".element__feedback-like");
+  const likeButton = card.querySelector(".element__feedback-like");
   likeButton.addEventListener("click", function () {
     likeButton.classList.toggle("element__feedback-like_active");
   });
@@ -111,11 +111,11 @@ pictureButtonClose.addEventListener("click", function () {
 });
 
 //Открытие картинок
-function openPictures(obj) {
-  const picture = obj.querySelector(".element__img");
+function openPictures(card) {
+  const picture = card.querySelector(".element__img");
   // const picturePopup = document.querySelector(".picture-popup");
   const openingPicture = document.querySelector(".picture-popup__image");
-  const pictureName = obj.querySelector(".element__feedback-heading");
+  const pictureName = card.querySelector(".element__feedback-heading");
   const openingPictureName = document.querySelector(".picture-popup__name");
   picture.setAttribute("alt", pictureName.textContent);
   picture.addEventListener("click", function () {
@@ -165,7 +165,7 @@ function formCardHandler(evt) {
   const newObj = {};
   newObj["name"] = itemNewName;
   newObj["link"] = itemNewLink;
-  let card = createCard(newObj);
+  const card = createCard(newObj);
   addCard(card, cards);
   // addLike();
   // openPictures(newObj);
