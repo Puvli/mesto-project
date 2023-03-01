@@ -1,0 +1,5 @@
+.popup__form-button_inactive {
+    opacity: 0.2;
+    color: black;
+    background: #ffffff;
+  }

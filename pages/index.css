@@ -47,3 +47,12 @@
 @import url(../blocks/picture-popup/__image/picture-popup__image.css);
 @import url(../blocks/picture-popup/__name/picture-popup__name.css);
 @import url(../blocks/picture-popup/_opened/picture-popup_opened.css);
+@import url(../blocks/popup/__user-name_error/popup__user-name_error.css);
+@import url(../blocks/popup/__user-activity_error/popup__user-activity_error.css);
+@import url(../blocks/card-popup/__error/card-popup__error.css);
+@import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/__form-button/_inactive/popup__form-button_inactive.css);
+@import url(../blocks/popup/_type/_error/popup_type_error.css);
+@import url(../blocks/popup/__error/_active/popup__error_active.css);
+@import url(../blocks/card-popup/__error/_active/card-popup__error_active.css);
+@import url(../blocks/card-popup/_type/_error/card-popup_type_error.css);

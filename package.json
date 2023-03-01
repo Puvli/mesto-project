@@ -1,0 +1,11 @@
+{
+  "name": "mesto-project",
+  "version": "1.0.0",
+  "description": "* Проект \"Место\" с элементами адаптивной верстки. \r Выполнен студентом Яндекс Практикума Зайцевым Павлом",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

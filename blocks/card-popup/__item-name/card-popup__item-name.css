@@ -17,6 +17,12 @@
   color: #c4c4c4;
 }
 
+/* .card-popup__error {
+  padding: 0;
+  margin: 5px 0 13px 0;
+  color: #ff0000;
+} */
+
 @media screen and (max-width: 320px) {
   .card-popup__item-name {
     line-height: 16px;

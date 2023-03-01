@@ -4,6 +4,7 @@
     border-radius: 10px;
     background-color: white;
     width: 430px;
+    cursor: auto;
   }
 
   @media screen and (max-width: 540px) {
