@@ -1,7 +1,32 @@
+import "../styles/index.css"; 
 import { initialCards } from "./initialCards.js";
 import { closeEscButton, closePopup, openPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { addCard, createCard } from "./card.js";
+
+const addButton = new URL("../images/AddButtonVector.svg", import.meta.url);
+const closeIcon = new URL("../images/Close-Icon.svg", import.meta.url);
+const coloredLike = new URL("../images/ColoredLike.svg", import.meta.url);
+const editPen = new URL("../images/editPen.svg", import.meta.url);
+const group = new URL("../images/Group.svg", import.meta.url);
+const like = new URL("../images/Like.svg", import.meta.url);
+const logo = new URL("../images/logo.svg", import.meta.url);
+const vector = new URL("../images/Vector.svg", import.meta.url);
+const jak = new URL("../images/image.jpg", import.meta.url);
+const bucket = new URL("../images/image.jpg", import.meta.url);
+
+const images = [
+  { name: "add", link: addButton },
+  { name: "close", link: closeIcon },
+  { name: "editPen", link: editPen },
+  { name: "group", link: group },
+  { name: "like", link: like },
+  { name: "logo", link: logo },
+  { name: "vector", link: vector },
+  { name: "coloredLike", link: coloredLike },
+  { name: "Jak", link: jak },
+];
+
 const popupProfile = document.querySelector(".popup");
 
 const popupPictures = document.querySelector(".picture-popup");

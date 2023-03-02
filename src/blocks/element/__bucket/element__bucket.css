@@ -5,6 +5,8 @@
   height: 19px;
   top: 10px;
   right: 10px;
+  background-image: url('../../../images/Group.svg');
+
 }
 
 .element__bucket:hover {
