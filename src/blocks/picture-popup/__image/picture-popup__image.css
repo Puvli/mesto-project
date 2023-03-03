@@ -1,8 +1,0 @@
-.picture-popup__image {
-  max-width: 75vw;
-  max-height: 75vh;
-  object-fit: contain;
-  position: relative;
-  cursor: auto;
-  margin-right: 40px;
-}

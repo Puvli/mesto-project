@@ -1,9 +1,0 @@
-.element__img {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  object-fit: cover;
-  width: 282px;
-  height: 282px;
-  cursor: pointer;
-  /* background-image: url('../../../images/Group.svg'); */
-}
