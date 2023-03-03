@@ -1,5 +1,6 @@
 .profile-popup__container {
   /* background-color: white; */
+  display: flex;
   color: black;
   /* width: 430px; */
   /* height: 330px; */

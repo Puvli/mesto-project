@@ -78,6 +78,8 @@ export const enableValidation = (
     errorClass: "",
   }
 ) => {
-  const formList = document.querySelector(obj.formSelector);
-  setEventListeners(formList, obj);
+  const formList =  Array.from(document.querySelectorAll(obj.formSelector));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  })
 };

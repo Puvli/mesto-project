@@ -56,16 +56,16 @@
         </div>
       </section>
 
-      <section class="popup">
-        <div class="popup__container">
-          <button type="button" class="popup__close-button"></button>
-          <form name="popup" class="popup__form" novalidate>
-            <h2 class="popup__heading">Редактировать профиль</h2>
-            <fieldset class="popup__user-info">
+      <section class="profile-popup">
+        <div class="profile-popup__container">
+          <button type="button" class="profile-popup__close-button"></button>
+          <form name="popup" class="profile-popup__form" novalidate>
+            <h2 class="profile-popup__heading">Редактировать профиль</h2>
+            <fieldset class="profile-popup__user-info">
               <input
                 type="text"
                 id="user-name"
-                class="popup__input popup__user-name"
+                class="profile-popup__input profile-popup__user-name"
                 name="name"
                 placeholder="Имя"
                 required
@@ -74,11 +74,11 @@
                 pattern="^[a-zA-Zа-яА-Я-]+$"
                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               />
-              <span class="user-name-error popup__error"></span>
+              <span class="user-name-error profile-popup__error"></span>
               <input
                 type="text"
                 id="user-activity"
-                class="popup__input popup__user-activity"
+                class="profile-popup__input profile-popup__user-activity"
                 name="activity"
                 placeholder="О себе"
                 minlength="2"
@@ -87,9 +87,9 @@
                 pattern="^[a-zA-Zа-яА-Я-]+$"
                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
               />
-              <span class="user-activity-error popup__error"></span>
+              <span class="user-activity-error profile-popup__error"></span>
             </fieldset>
-            <button type="submit" class="popup__form-button">Сохранить</button>
+            <button type="submit" class="profile-popup__form-button">Сохранить</button>
           </form>
         </div>
       </section>
