@@ -1,0 +1,10 @@
+.card-popup__info-item {
+  border: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* gap: 32px; */
+  width: 80%;
+}

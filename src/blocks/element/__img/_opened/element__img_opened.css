@@ -1,0 +1,12 @@
+.element__img_opened {
+    position: fixed;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    /* background-image: url(../../../images/kirill-pershin-1088404-unsplash.jpg); */
+  }

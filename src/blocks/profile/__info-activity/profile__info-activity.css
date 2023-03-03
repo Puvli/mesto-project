@@ -1,0 +1,33 @@
+.profile__info-activity {
+  font-weight: 400;
+  /* font-size: 1.4vw; */
+  font-size: 18px;
+  line-height: 22px;
+  padding: 0;
+  margin: 9px 0 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* @media screen and (min-width: 1280px) {
+  .profile__info-activity {
+    font-size: 18px;
+  }
+} */
+
+@media screen and (max-width: 600px) {
+  .profile__info-activity {
+    font-size: 10px;
+    width: 140px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__info-activity {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    width: 196px;
+  }
+}
