@@ -1,6 +1,13 @@
-import { openPopup, closeEscButton } from "./modal.js";
+import { openPopup, closePopup } from "./modal.js";
 
 const picturePopup = document.querySelector(".picture-popup");
+
+export function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
 
 export function deleteCards(temp) {
   const delButton = temp.querySelector(".element__bucket");
@@ -28,7 +35,7 @@ export function openPictures(card) {
     openingPicture.setAttribute("alt", pictureName.textContent);
 
     openPopup(picturePopup);
-    closeEscButton(picturePopup);
+    // closeByEscape();
   });
 }
 
