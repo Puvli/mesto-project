@@ -28,6 +28,8 @@ const images = [
 ];
 
 const popupProfile = document.querySelector(".profile-popup");
+const profileButton = document.querySelector('.profile-popup__form-button');
+const cardSubmitButton = document.querySelector('.card-popup__form-button');
 
 const popupPictures = document.querySelector(".picture-popup");
 const cardPopup = document.querySelector(".card-popup");
@@ -107,9 +109,9 @@ const popupProfileOpenButton = document.querySelector(".profile__info-button");
 popupProfileOpenButton.addEventListener("click", function () {
   openPopup(popupProfile);
   const button = Array.from(document.querySelectorAll(".popup__button"));
-  button[1].disabled = false;
-  button[1].classList.remove("popup__button_inactive");
-  formProfile.addEventListener("submit", handleProfileFormSubmit);
+  profileButton.disabled = false;
+  profileButton.classList.remove("popup__button_inactive");
+  // formProfile.addEventListener("submit", handleProfileFormSubmit);
 
   // closeByEscape();
 });
@@ -149,17 +151,18 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const itemNewName = itemName.value;
   const itemNewLink = itemLink.value;
-  const submitButton = document.querySelector(".popup__button");
+  // const submitButton = document.querySelector(".popup__button");
   const newObj = {};
   newObj["name"] = itemNewName;
   newObj["link"] = itemNewLink;
   const card = createCard(newObj);
   addCard(card, cards);
   closePopup(newCard);
-  itemName.value = "";
-  itemLink.value = "";
-  submitButton.disabled = true;
-  submitButton.classList.add("popup__button_inactive");
+  // itemName.value = "";
+  // itemLink.value = "";
+  evt.target.reset();
+  cardSubmitButton.disabled = true;
+  cardSubmitButton.classList.add("popup__button_inactive");
 }
 
 formProfile.addEventListener("submit", handleProfileFormSubmit);

@@ -1,6 +1,9 @@
 import { openPopup, closePopup } from "./modal.js";
 
 const picturePopup = document.querySelector(".picture-popup");
+const openingPicture = document.querySelector(".picture-popup__image");
+const openingPictureName = document.querySelector(".picture-popup__name");
+const cardTemplate = document.querySelector(".template").content;
 
 export function closeByEscape(evt) {
   if (evt.key === "Escape") {
@@ -25,9 +28,9 @@ export function addLike(card) {
 
 export function openPictures(card) {
   const picture = card.querySelector(".element__img");
-  const openingPicture = document.querySelector(".picture-popup__image");
+  // const openingPicture = document.querySelector(".picture-popup__image");
   const pictureName = card.querySelector(".element__feedback-heading");
-  const openingPictureName = document.querySelector(".picture-popup__name");
+  // const openingPictureName = document.querySelector(".picture-popup__name");
   picture.setAttribute("alt", pictureName.textContent);
   picture.addEventListener("click", function () {
     openingPicture.src = picture.src;
@@ -40,7 +43,7 @@ export function openPictures(card) {
 }
 
 export function createCard(obj) {
-  const cardTemplate = document.querySelector(".template").content;
+  // const cardTemplate = document.querySelector(".template").content;
   const template = cardTemplate.querySelector(".element").cloneNode(true);
   template.querySelector(".element__img").src = obj.link;
   template.querySelector(".element__feedback-heading").textContent = obj.name;
