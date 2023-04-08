@@ -209,39 +209,3 @@ Promise.all([initiateProfile(), initiateCards()])
 
     console.log(err);
   });
-
-// initiateProfile()
-// .then((res) => {
-//   if (res.ok) {
-//     return res.json();
-//   }
-
-//   return Promise.reject(res.status);
-// })
-
-// .then((obj) => {
-//   profileName.textContent = obj.name;
-//   profileJob.textContent = obj.about;
-//   profileAvatar.src = obj.avatar;
-//   console.log("avatar", obj);
-// })
-
-// inititateCards()
-// // Promise.all([initiateProfile()])
-// .then((res) => {
-//   if (res.ok) {
-//     return res.json(); // возвращаем вызов метода json
-//   }
-
-//   return Promise.reject(res.status);
-// })
-
-// .then((res) => {
-//   for (let i = 0; i < res.length; i++) {
-//     const card = createCard(res[i]);
-//     addCard(card, cards);
-//     console.log(res[i].likes.length);
-//     console.log(res[i]);
-//   }
-// }
-// );
