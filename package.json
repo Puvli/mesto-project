@@ -5,7 +5,9 @@
   "main": "src/components/index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -d dist"
   },
   "author": "Pavel Zaycev",
   "license": "ISC",
@@ -22,6 +24,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "core-js": "^3.29.0"
+    "core-js": "^3.29.0",
+    "gh-pages": "^5.0.0"
   }
 }

@@ -11,8 +11,8 @@ const openingPicture = document.querySelector(".picture-popup__image");
 const openingPictureName = document.querySelector(".picture-popup__name");
 const cardTemplate = document.querySelector(".template").content;
 
-function hideBucket(temp) {
-  const bucketDel = temp.querySelector(".element__bucket");
+function hideBucket(template) {
+  const bucketDel = template.querySelector(".element__bucket");
   bucketDel.classList.add("element__bucket_disabled");
 }
 
@@ -23,56 +23,52 @@ export function closeByEscape(evt) {
   }
 }
 
-export function deleteCards(temp, id) {
-  const delButton = temp.querySelector(".element__bucket");
+export function deleteCards(template, id) {
+  const delButton = template.querySelector(".element__bucket");
   delButton.addEventListener("click", function () {
-    temp.remove();
-    deleteMyCards(id);
+    deleteMyCards(id)
+      .then(() => {
+        template.remove();
+      })
+      .catch((e) => e);
   });
 }
 
 export function addLike(card, id) {
   const likeButton = card.querySelector(".element__feedback-like");
+  const likeNumber = card.querySelector(".element__feedback-like-number");
   likeButton.addEventListener("click", function () {
-    likeButton.classList.toggle("element__feedback-like_active");
-    if (likeButton.classList.contains("element__feedback-like_active")) {
+    if (!likeButton.classList.contains("element__feedback-like_active")) {
       addServerLike(id)
         .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
+          likeButton.classList.add("element__feedback-like_active");
 
-          return Promise.reject(res.status);
-        })
-
-        .then((res) => {
-          console.log("new likes", res.likes.length);
-          card.querySelector(".element__feedback-like-number").textContent =
-            res.likes.length;
+          console.log("new likes", res.likes);
+          likeNumber.textContent = res.likes.length;
           card
             .querySelector(".element__feedback-like-number")
             .classList.remove("element__feedback-like-number_inactive");
+        })
+        .catch((err) => {
+          //попадаем сюда если один из промисов завершаться ошибкой
+
+          console.log(err);
         });
     } else {
       removeLike(id)
         .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-
-          return Promise.reject(res.status);
-        })
-
-        .then((res) => {
-          console.log("new likes", res.likes.length);
+          console.log("deleted", res.likes);
           if (res.likes.length === 0) {
-            card
-              .querySelector(".element__feedback-like-number")
-              .classList.add("element__feedback-like-number_inactive");
+            likeNumber.classList.add("element__feedback-like-number_inactive");
           } else {
-            card.querySelector(".element__feedback-like-number").textContent =
-              res.likes.length;
+            likeNumber.textContent = res.likes.length;
           }
+          likeButton.classList.remove("element__feedback-like_active");
+        })
+        .catch((err) => {
+          //попадаем сюда если один из промисов завершаться ошибкой
+
+          console.log(err);
         });
     }
   });
@@ -91,13 +87,20 @@ export function openPictures(card) {
   });
 }
 
-export function createCard(obj) {
+export function createMyCards(obj) {
   const template = cardTemplate.querySelector(".element").cloneNode(true);
-  template.querySelector(".element__img").src = obj.link;
+  const image = template.querySelector(".element__img");
+  image.src = obj.link;
+  image.alt = obj.name;
   template.querySelector(".element__feedback-heading").textContent = obj.name;
   openPictures(template);
   addLike(template, obj["_id"]);
   deleteCards(template, obj["_id"]);
+  return template;
+}
+
+export function createCard(obj, id) {
+  const template = createMyCards(obj);
   if (obj.likes.length > 0) {
     template
       .querySelector(".element__feedback-like-number")
@@ -106,38 +109,17 @@ export function createCard(obj) {
       obj.likes.length;
   }
 
-  initiateProfile()
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+  if (obj.owner._id !== id) {
+    hideBucket(template);
+  }
+  for (let j = 0; j < obj.likes.length; j++) {
+    if (obj.likes[j]._id === id) {
+      template
+        .querySelector(".element__feedback-like")
+        .classList.add("element__feedback-like_active");
+    }
+  }
 
-      return Promise.reject(res.status);
-    })
-
-    .then((res) => {
-      if (obj.owner._id !== res._id) {
-        hideBucket(template);
-      }
-      for (let j = 0; j < obj.likes.length; j++) {
-        if (obj.likes[j]._id === res._id) {
-          template
-            .querySelector(".element__feedback-like")
-            .classList.add("element__feedback-like_active");
-        }
-      }
-    });
-
-  return template;
-}
-
-export function createMyCards(obj) {
-  const template = cardTemplate.querySelector(".element").cloneNode(true);
-  template.querySelector(".element__img").src = obj.link;
-  template.querySelector(".element__feedback-heading").textContent = obj.name;
-  openPictures(template);
-  addLike(template, obj["_id"]);
-  deleteCards(template, obj["_id"]);
   return template;
 }
 

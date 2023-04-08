@@ -1,3 +1,4 @@
+import { checkResponse } from "./utils";
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
   headers: {
@@ -6,24 +7,16 @@ const config = {
   },
 };
 
-// export const checkCard = () => {
-//   return fetch(`${config.baseUrl}/users/me`, {
-//     headers: config.headers,
-//   }); 
-// }
-
 export const initiateProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
-  });
+  }).then((res) => checkResponse(res));
 };
 
-export const inititateCards = () => {
-  return fetch("https://nomoreparties.co/v1/plus-cohort-22/cards", {
-    headers: {
-      authorization: "a86aba58-abf0-4ce7-8347-0d661387097c",
-    },
-  });
+export const initiateCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  }).then((res) => checkResponse(res));
 };
 
 export const updateProfile = (nameoOfProfile, job) => {
@@ -34,7 +27,7 @@ export const updateProfile = (nameoOfProfile, job) => {
       name: nameoOfProfile,
       about: job,
     }),
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const updateAvatar = (link) => {
@@ -44,7 +37,7 @@ export const updateAvatar = (link) => {
     body: JSON.stringify({
       avatar: link,
     }),
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const addNewPhotoCard = (cardName, cardLink) => {
@@ -55,26 +48,26 @@ export const addNewPhotoCard = (cardName, cardLink) => {
       name: cardName,
       link: cardLink,
     }),
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const deleteMyCards = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, {
     method: "DELETE",
     headers: config.headers,
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const addServerLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: "PUT",
     headers: config.headers,
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const removeLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: "DELETE",
     headers: config.headers,
-  });
+  }).then((res) => checkResponse(res));
 };

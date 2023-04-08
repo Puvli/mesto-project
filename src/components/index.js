@@ -4,12 +4,12 @@ import { enableValidation } from "./validate.js";
 import { addCard, createCard, createMyCards } from "./card.js";
 import {
   initiateProfile,
-  inititateCards,
+  initiateCards,
   updateProfile,
   addNewPhotoCard,
   updateAvatar,
 } from "./api.js";
-import { renderLoading } from "./utils";
+import { checkResponse, renderLoading } from "./utils";
 const popupProfile = document.querySelector(".profile-popup");
 const profileButton = document.querySelector(".profile-popup__form-button");
 const cardSubmitButton = document.querySelector(".card-popup__form-button");
@@ -86,17 +86,14 @@ function handleProfileFormSubmit(evt) {
 
   updateProfile(name, job)
     .then((res) => {
-      if (res.ok) {
-        return res.json(); 
-      }
-
-
-      return Promise.reject(res.status);
-    })
-    .then((res) => {
       profileJob.textContent = res.about;
       profileName.textContent = res.name;
       closePopup(popupProfile);
+    })
+    .catch((err) => {
+      //попадаем сюда если один из промисов завершаться ошибкой
+
+      console.log(err);
     })
     .finally(() => {
       renderLoading(false, btn);
@@ -108,21 +105,19 @@ function handleAvatarForm(event) {
   const btn = avatarSubmitForm.querySelector(".avatar-popup__form-button");
   renderLoading(true, btn);
   const link = avatarPopupPicture.value;
- 
-  updateAvatar(link)
-    .then((res) => {
-      if (res.ok) {
-        return res.json(); 
-      }
 
-      return Promise.reject(res.status);
-    })
+  updateAvatar(link)
     .then((res) => {
       profileAvatar.src = res.avatar;
       closePopup(avatarPopup);
       event.target.reset();
       btn.disabled = true;
       btn.classList.add("popup__button_inactive");
+    })
+    .catch((err) => {
+      //попадаем сюда если один из промисов завершаться ошибкой
+
+      console.log(err);
     })
     .finally(() => {
       renderLoading(false, btn);
@@ -170,13 +165,6 @@ function handleCardFormSubmit(evt) {
   const newObj = {};
   addNewPhotoCard(itemNewName, itemNewLink)
     .then((res) => {
-      if (res.ok) {
-        return res.json(); 
-      }
-
-      return Promise.reject(res.status);
-    })
-    .then((res) => {
       console.log("new object", res);
       const card = createMyCards(res);
       addCard(card, cards);
@@ -184,6 +172,11 @@ function handleCardFormSubmit(evt) {
       evt.target.reset();
       cardSubmitButton.disabled = true;
       cardSubmitButton.classList.add("popup__button_inactive");
+    })
+    .catch((err) => {
+      //попадаем сюда если один из промисов завершаться ошибкой
+
+      console.log(err);
     })
     .finally(() => {
       renderLoading(false, btn);
@@ -194,40 +187,59 @@ formProfile.addEventListener("submit", handleProfileFormSubmit);
 formCardElement.addEventListener("submit", handleCardFormSubmit);
 avatarSubmitForm.addEventListener("submit", handleAvatarForm);
 
-initiateProfile()
-.then((res) => {
-  if (res.ok) {
-    return res.json(); 
-  }
+Promise.all([initiateProfile(), initiateCards()])
+  .then(([resProfile, resCard]) => {
+    console.log("json", resCard);
+    profileName.textContent = resProfile.name;
+    profileJob.textContent = resProfile.about;
+    profileAvatar.src = resProfile.avatar;
+    console.log("profile", resProfile);
+    for (let i = 0; i < resCard.length; i++) {
+      const card = createCard(resCard[i], resProfile._id);
+      addCard(card, cards);
+      console.log(resCard[i].likes.length);
+      console.log(resCard[i]);
+    }
+  })
 
+  .catch((err) => {
+    //попадаем сюда если один из промисов завершаться ошибкой
 
-  return Promise.reject(res.status);
-})
+    console.log(err);
+  });
 
-.then((obj) => {
-  profileName.textContent = obj.name;
-  profileJob.textContent = obj.about;
-  profileAvatar.src = obj.avatar;
-  console.log("avatar", obj);
-})
+// initiateProfile()
+// .then((res) => {
+//   if (res.ok) {
+//     return res.json();
+//   }
 
+//   return Promise.reject(res.status);
+// })
 
-inititateCards()
-.then((res) => {
-  if (res.ok) {
-    return res.json(); // возвращаем вызов метода json
-  }
+// .then((obj) => {
+//   profileName.textContent = obj.name;
+//   profileJob.textContent = obj.about;
+//   profileAvatar.src = obj.avatar;
+//   console.log("avatar", obj);
+// })
 
+// inititateCards()
+// // Promise.all([initiateProfile()])
+// .then((res) => {
+//   if (res.ok) {
+//     return res.json(); // возвращаем вызов метода json
+//   }
 
-  return Promise.reject(res.status);
-})
+//   return Promise.reject(res.status);
+// })
 
-.then((res) => {
-  for (let i = 0; i < res.length; i++) {
-    const card = createCard(res[i]);
-    addCard(card, cards);
-    console.log(res[i].likes.length);
-    console.log(res[i]);
-  }
-}
-);
+// .then((res) => {
+//   for (let i = 0; i < res.length; i++) {
+//     const card = createCard(res[i]);
+//     addCard(card, cards);
+//     console.log(res[i].likes.length);
+//     console.log(res[i]);
+//   }
+// }
+// );
