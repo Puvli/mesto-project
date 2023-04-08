@@ -9,7 +9,7 @@ import {
   addNewPhotoCard,
   updateAvatar,
 } from "./api.js";
-import { checkResponse, renderLoading } from "./utils";
+import { renderLoading } from "./utils";
 const popupProfile = document.querySelector(".profile-popup");
 const profileButton = document.querySelector(".profile-popup__form-button");
 const cardSubmitButton = document.querySelector(".card-popup__form-button");
@@ -126,6 +126,8 @@ function handleAvatarForm(event) {
 
 const popupProfileOpenButton = document.querySelector(".profile__info-button");
 popupProfileOpenButton.addEventListener("click", function () {
+  jobInput.value = profileJob.textContent;
+  nameInput.value = profileName.textContent;
   openPopup(popupProfile);
   profileButton.disabled = true;
   profileButton.classList.add("popup__button_inactive");
@@ -192,8 +194,6 @@ Promise.all([initiateProfile(), initiateCards()])
     console.log("json", resCard);
     profileName.textContent = resProfile.name;
     profileJob.textContent = resProfile.about;
-    jobInput.value = resProfile.about;
-    nameInput.value = resProfile.name;
     profileAvatar.src = resProfile.avatar;
     console.log("profile", resProfile);
     for (let i = 0; i < resCard.length; i++) {

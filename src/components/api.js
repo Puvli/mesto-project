@@ -1,4 +1,3 @@
-import { checkResponse } from "./utils";
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-22",
   headers: {
@@ -6,6 +5,14 @@ const config = {
     "Content-Type": "application/json",
   },
 };
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(res.status);
+  }
+}
 
 export const initiateProfile = () => {
   return fetch(`${config.baseUrl}/users/me`, {

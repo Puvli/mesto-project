@@ -77,7 +77,6 @@ export function addLike(card, id) {
 export function openPictures(card) {
   const picture = card.querySelector(".element__img");
   const pictureName = card.querySelector(".element__feedback-heading");
-  picture.setAttribute("alt", pictureName.textContent);
   picture.addEventListener("click", function () {
     openingPicture.src = picture.src;
     openingPictureName.textContent = pictureName.textContent;
