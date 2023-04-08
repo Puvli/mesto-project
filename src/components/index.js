@@ -192,6 +192,8 @@ Promise.all([initiateProfile(), initiateCards()])
     console.log("json", resCard);
     profileName.textContent = resProfile.name;
     profileJob.textContent = resProfile.about;
+    jobInput.value = resProfile.about;
+    nameInput.value = resProfile.name;
     profileAvatar.src = resProfile.avatar;
     console.log("profile", resProfile);
     for (let i = 0; i < resCard.length; i++) {
