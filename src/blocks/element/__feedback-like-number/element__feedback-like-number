@@ -1,0 +1,8 @@
+.element__feedback-like-number {
+  margin: 0;
+  padding: 0;
+}
+
+.element__feedback-like-number_inactive {
+  display: none;
+}

@@ -13,3 +13,7 @@
   opacity: 0.6;
   cursor: pointer;
 }
+
+.element__bucket_disabled {
+  display: none;
+}

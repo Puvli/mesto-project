@@ -14,16 +14,50 @@
     <main>
       <section class="profile">
         <div class="profile__page">
-          <div class="profile__avatar"></div>
+          <!-- <div class="profile__avatar">
+            <div class="profile__avatar_hovered"></div>
+          </div> -->
+          <div class="profile__avatar_hovered">
+            <img class="profile__avatar" src="" alt="" />
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__info-name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__info-button"></button>
             <p class="profile__info-activity">Исследователь океана</p>
           </div>
         </div>
-
         <button type="button" class="profile__add-button"></button>
       </section>
+
+      <section class="avatar-popup popup">
+        <div class="avatar-popup__container">
+          <button
+            type="button"
+            class="avatar-popup__close-button popup__close-button"
+          ></button>
+          <form name="avatar-popup" class="avatar-popup__form popup__form">
+            <h2 class="avatar-popup__heading">Обновить аватар</h2>
+            <input
+              type="url"
+              name="avatar-picture"
+              class="avatar-popup__picture popup__input"
+              required
+              id="avatar-picture"
+            />
+            <span
+              class="avatar-picture-error popup__error-message avatar-popup__error"
+            ></span>
+            <button
+              type="submit"
+              class="avatar-popup__form-button popup__button"
+            >
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </section>
+
       <section class="card-popup popup">
         <div class="card-popup__container">
           <button
@@ -47,7 +81,9 @@
                 minlength="2"
                 maxlength="30"
               />
-              <span class="card-input-name-error card-popup__error popup__error-message"></span>
+              <span
+                class="card-input-name-error card-popup__error popup__error-message"
+              ></span>
               <input
                 type="url"
                 id="card-input-url"
@@ -109,7 +145,7 @@
             </fieldset>
             <button
               type="submit"
-              class="profile-popup__form-button popup__button"
+              class="profile-popup__form-button popup__button popup__button_inactive"
             >
               Сохранить
             </button>
@@ -124,7 +160,10 @@
             <div class="element__bucket"></div>
             <div class="element__feedback">
               <h2 class="element__feedback-heading"></h2>
-              <button type="button" class="element__feedback-like"></button>
+              <div class="element__feedback-likes">
+                <button type="button" class="element__feedback-like"></button>
+                <p class="element__feedback-like-number"></p>
+              </div>
             </div>
           </li>
         </template>
