@@ -1,15 +1,60 @@
+import { Section } from "./Section";
 import "../styles/index.css";
 import { closePopup, openPopup } from "./modal.js";
-import { enableValidation } from "./validate.js";
-import { addCard, createCard, createMyCards } from "./card.js";
+import { /*enableValidation,*/ FormValidator } from "./validate.js";
 import {
-  initiateProfile,
+  addCard,
+  /*createCard, createMyCards,*/ Card,
+  cardTemplate,
+} from "./card.js";
+import {
+  /*initiateProfile,
   initiateCards,
   updateProfile,
   addNewPhotoCard,
-  updateAvatar,
+  updateAvatar,*/
+  api,
 } from "./api.js";
 import { renderLoading } from "./utils";
+
+// ===============================CLASS=================================
+
+function rendererOfCards(items, id, templateSelector, elements) {
+  for (let i = 0; i < items.length; i++) {
+    // const card = createCard(resCard[i], resProfile._id);
+    const card = new Card(items[i], templateSelector);
+    addCard(card.outputCard(id), elements);
+    //console.log(resCard[i].likes.length);
+    // console.log("card", resCard[i]);
+  }
+}
+
+let section;
+
+Promise.all([api.initiateProfile(), api.initiateCards()])
+  .then(([resProfile, resCard]) => {
+    console.log("json", resCard);
+    profileName.textContent = resProfile.name;
+    profileJob.textContent = resProfile.about;
+    profileAvatar.src = resProfile.avatar;
+    console.log("profile", resProfile);
+    section = new Section(
+      {
+        items: resCard,
+        renderer: rendererOfCards(resCard, resProfile._id, cardTemplate, cards),
+      },
+      cardTemplate
+    );
+
+    section.output();
+  })
+
+  .catch((err) => {
+    //попадаем сюда если один из промисов завершаться ошибкой
+
+    console.log(err);
+  });
+
 const popupProfile = document.querySelector(".profile-popup");
 const profileButton = document.querySelector(".profile-popup__form-button");
 const cardSubmitButton = document.querySelector(".card-popup__form-button");
@@ -61,17 +106,44 @@ popupProfileCloseButton.addEventListener("click", function () {
 });
 
 export const formProfile = document.querySelector(".profile-popup__form");
+export const formCardElement = document.querySelector(".card-popup__form");
 const nameInput = formProfile.querySelector(".profile-popup__user-name");
 const jobInput = formProfile.querySelector(".profile-popup__user-activity");
+const profileValid = new FormValidator(
+  {
+    /*formSelector: ".popup__form",*/
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_inactive",
+    inputErrorClass: "popup__input_error",
+    errorClass: "popup__error-message_active",
+  },
+  formProfile
+);
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_inactive",
-  inputErrorClass: "popup__input_error",
-  errorClass: "popup__error-message_active",
-});
+profileValid.enableValidation();
+
+const cardValid = new FormValidator(
+  {
+    /*formSelector: ".popup__form",*/
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_inactive",
+    inputErrorClass: "popup__input_error",
+    errorClass: "popup__error-message_active",
+  },
+  formCardElement
+);
+cardValid.enableValidation();
+
+// enableValidation({
+//   formSelector: ".popup__form",
+//   inputSelector: ".popup__input",
+//   submitButtonSelector: ".popup__button",
+//   inactiveButtonClass: "popup__button_inactive",
+//   inputErrorClass: "popup__input_error",
+//   errorClass: "popup__error-message_active",
+// });
 
 export const profileName = document.querySelector(".profile__info-name");
 export const profileJob = document.querySelector(".profile__info-activity");
@@ -84,7 +156,8 @@ function handleProfileFormSubmit(evt) {
   const job = jobInput.value;
   const name = nameInput.value;
 
-  updateProfile(name, job)
+  api
+    .updateProfile(name, job)
     .then((res) => {
       profileJob.textContent = res.about;
       profileName.textContent = res.name;
@@ -106,7 +179,8 @@ function handleAvatarForm(event) {
   renderLoading(true, btn);
   const link = avatarPopupPicture.value;
 
-  updateAvatar(link)
+  api
+    .updateAvatar(link)
     .then((res) => {
       profileAvatar.src = res.avatar;
       closePopup(avatarPopup);
@@ -144,7 +218,7 @@ popupClosingButton.addEventListener("click", function () {
   closePopup(newCard);
 });
 
-export const formCardElement = document.querySelector(".card-popup__form");
+// export const formCardElement = document.querySelector(".card-popup__form");
 const itemName = document.querySelector(".card-popup__item-name");
 const itemLink = document.querySelector(".card-popup__item-link");
 
@@ -164,12 +238,13 @@ function handleCardFormSubmit(evt) {
   const itemNewLink = itemLink.value;
   const btn = formCardElement.querySelector(".card-popup__form-button");
   renderLoading(true, btn);
-  const newObj = {};
-  addNewPhotoCard(itemNewName, itemNewLink)
+  // const newObj = {};
+  api
+    .addNewPhotoCard(itemNewName, itemNewLink)
     .then((res) => {
       console.log("new object", res);
-      const card = createMyCards(res);
-      addCard(card, cards);
+      const card = new Card(res, cardTemplate);
+      section.addItem(card.outputCard(0), cards);
       closePopup(newCard);
       evt.target.reset();
       cardSubmitButton.disabled = true;
@@ -188,24 +263,3 @@ function handleCardFormSubmit(evt) {
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 formCardElement.addEventListener("submit", handleCardFormSubmit);
 avatarSubmitForm.addEventListener("submit", handleAvatarForm);
-
-Promise.all([initiateProfile(), initiateCards()])
-  .then(([resProfile, resCard]) => {
-    console.log("json", resCard);
-    profileName.textContent = resProfile.name;
-    profileJob.textContent = resProfile.about;
-    profileAvatar.src = resProfile.avatar;
-    console.log("profile", resProfile);
-    for (let i = 0; i < resCard.length; i++) {
-      const card = createCard(resCard[i], resProfile._id);
-      addCard(card, cards);
-      console.log(resCard[i].likes.length);
-      console.log(resCard[i]);
-    }
-  })
-
-  .catch((err) => {
-    //попадаем сюда если один из промисов завершаться ошибкой
-
-    console.log(err);
-  });
