@@ -1,4 +1,4 @@
-import { openPopup, closePopup, PopupWithImage } from "./modal.js";
+import { openPopup, closePopup } from "./modal.js";
 import {
   /*deleteMyCards,
   addServerLike,
@@ -144,9 +144,9 @@ export class Card {
     bucketDel.classList.add("element__bucket_disabled");
   }
 
-  // #closeByEscape() {
-  //   closeByEscape(evt);
-  // }
+  #closeByEscape() {
+    closeByEscape(evt);
+  }
 
   #deleteCards(template, id) {
     const delButton = template.querySelector(".element__bucket");
@@ -207,23 +207,12 @@ export class Card {
   #openPictures(card) {
     const picture = card.querySelector(".element__img");
     const pictureName = card.querySelector(".element__feedback-heading");
-    // picture.addEventListener("click", function () {
-    //   openingPicture.src = picture.src;
-    //   openingPictureName.textContent = pictureName.textContent;
-    //   openingPicture.setAttribute("alt", pictureName.textContent);
-
-    //   openPopup(picturePopup);
-    // });
-
-    const popupImage = new PopupWithImage(picturePopup);
-    // popupImage.setEventListeners();
     picture.addEventListener("click", function () {
-      popupImage.open(picture, pictureName);
-      popupImage.setEventListeners(picturePopup);
-      // document.addEventListener(
-      //   "keydown",
-      //   popupImage._handleEscClose()
-      // );
+      openingPicture.src = picture.src;
+      openingPictureName.textContent = pictureName.textContent;
+      openingPicture.setAttribute("alt", pictureName.textContent);
+
+      openPopup(picturePopup);
     });
   }
 
