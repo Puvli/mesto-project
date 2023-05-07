@@ -1,4 +1,3 @@
-
 //====================================CLASS=============================================================
 export class Api {
   constructor(options) {
@@ -79,4 +78,3 @@ export class Api {
     }).then((res) => this.checkResponse(res));
   };
 }
-
