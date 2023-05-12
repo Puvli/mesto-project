@@ -32,8 +32,8 @@ function callListener(picture, pictureName) {
 export const api = new Api(config);
 // ===============================CLASS=================================
 
-function createCard(items, id, templateSelector) {
-  const card = new Card(items, templateSelector, api, callListener);
+function createCard(items, id, templateElement) {
+  const card = new Card(items, templateElement, api, callListener);
   return card.outputCard(id);
 }
 
