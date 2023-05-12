@@ -1,7 +1,3 @@
-// import { PopupWithImage } from "./PopupWithImage.js";
-// import { api } from "./index.js";
-
-// const picturePopup = document.querySelector(".picture-popup");
 export const cardTemplate = document.querySelector(".template").content;
 
 export function addCard(card, container) {
@@ -10,38 +6,45 @@ export function addCard(card, container) {
 
 //=============== CLASS ===================
 export class Card {
-  constructor(cardData, templateSelector, api, callBack) {
+  constructor(cardData, cardElement, api, callBack) {
     this.cardData = cardData;
-    this.templateSelector = templateSelector
-      .querySelector(".element")
-      .cloneNode(true);
+    this._cardElement = cardElement.querySelector(".element").cloneNode(true);
     this.api = api;
     this.callBack = callBack;
-    this.cardImage = this.templateSelector.querySelector('.element__img');
+    this.cardImage = this._cardElement.querySelector(".element__img");
+    this._bucket = this._cardElement.querySelector(".element__bucket");
+    this.likeButton = this._cardElement.querySelector(
+      ".element__feedback-like"
+    );
+    this.likeNumber = this._cardElement.querySelector(
+      ".element__feedback-like-number"
+    );
+    this.pictureName = this._cardElement.querySelector(
+      ".element__feedback-heading"
+    );
   }
 
-  #hideBucket(template) {
-    const bucketDel = template.querySelector(".element__bucket");
-    bucketDel.classList.add("element__bucket_disabled");
+  #hideBucket() {
+    this._bucket.classList.add("element__bucket_disabled");
   }
 
-  #deleteCards(template, id) {
+  #deleteCards(id) {
     const api = this.api;
-    const delButton = template.querySelector(".element__bucket");
-    delButton.addEventListener("click", function () {
+    const _cardElement = this._cardElement;
+    this._bucket.addEventListener("click", function () {
       api
         .deleteMyCards(id)
         .then(() => {
-          template.remove();
+          _cardElement.remove();
         })
         .catch((e) => console.log(e));
     });
   }
 
-  #addLike(card, id) {
+  #addLike(id) {
     const api = this.api;
-    const likeButton = card.querySelector(".element__feedback-like");
-    const likeNumber = card.querySelector(".element__feedback-like-number");
+    const likeButton = this.likeButton;
+    const likeNumber = this.likeNumber;
     likeButton.addEventListener("click", function () {
       if (!likeButton.classList.contains("element__feedback-like_active")) {
         api
@@ -51,9 +54,10 @@ export class Card {
 
             console.log("new likes", res.likes);
             likeNumber.textContent = res.likes.length;
-            card
-              .querySelector(".element__feedback-like-number")
-              .classList.remove("element__feedback-like-number_inactive");
+
+            likeNumber.classList.remove(
+              "element__feedback-like-number_inactive"
+            );
           })
           .catch((err) => {
             //попадаем сюда если один из промисов завершаться ошибкой
@@ -83,66 +87,52 @@ export class Card {
     });
   }
 
-  #openPictures(card) {
-    const picture = card.querySelector(".element__img");
-    const pictureName = card.querySelector(".element__feedback-heading");
-    // const popupImage = new PopupWithImage(picturePopup);
-    picture.addEventListener("click", () => {
-      // popupImage.open(picture, pictureName);
-      // popupImage.setEventListeners(picturePopup);
-      this.callBack.call(this, picture, pictureName);
+  #openPictures() {
+    this.cardImage.addEventListener("click", () => {
+      this.callBack.call(this, this.cardImage, this.pictureName);
     });
   }
 
-  /* #addCard(card, container) {
-    container.prepend(card);
-  }*/
-
   #setEventListeners(obj) {
-    this.#openPictures(this.templateSelector);
-    this.#addLike(this.templateSelector, obj["_id"]);
-    this.#deleteCards(this.templateSelector, obj["_id"]);
+    this.#openPictures();
+    this.#addLike(obj["_id"]);
+    this.#deleteCards(obj["_id"]);
   }
 
   #createMyCards(obj) {
-    // const template = this.templateSelector;
-    // const image = this.templateSelector.querySelector(".element__img");
     this.cardImage.src = obj.link;
     this.cardImage.alt = obj.name;
-    this.templateSelector.querySelector(".element__feedback-heading").textContent = obj.name;
-    // this.#openPictures(template);
-    // this.#addLike(template, obj["_id"]);
-    // this.#deleteCards(template, obj["_id"]);
+    this._cardElement.querySelector(".element__feedback-heading").textContent =
+      obj.name;
+
     this.#setEventListeners(obj);
 
-    return this.templateSelector;
+    return this._cardElement;
   }
 
-  
-
   #createCard(obj, id) {
-    const template = this.#createMyCards(obj);
+    this._cardElement = this.#createMyCards(obj);
     if (obj.likes.length > 0) {
-      template
+      this._cardElement
         .querySelector(".element__feedback-like-number")
         .classList.remove("element__feedback-like-number_inactive");
-      template.querySelector(".element__feedback-like-number").textContent =
-        obj.likes.length;
+      this._cardElement.querySelector(
+        ".element__feedback-like-number"
+      ).textContent = obj.likes.length;
     }
 
     if (obj.owner._id !== id) {
-      this.#hideBucket(template);
+      this.#hideBucket();
     }
     for (let j = 0; j < obj.likes.length; j++) {
       if (obj.likes[j]._id === id) {
-        template
+        this._cardElement
           .querySelector(".element__feedback-like")
           .classList.add("element__feedback-like_active");
       }
     }
-    this.#setEventListeners(obj);
 
-    return template;
+    return this._cardElement;
   }
 
   outputCard(id) {

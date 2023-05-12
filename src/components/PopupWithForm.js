@@ -10,7 +10,7 @@ export class PopupWithForm extends Popup {
     this.inputList = Array.from(this.form.querySelectorAll(".popup__input"));
   }
 
-  renderLoading(isLoading, loadingText='Сохранение...') {
+  renderLoading(isLoading, loadingText = "Сохранение...") {
     if (isLoading) {
       this.button.textContent = loadingText;
     } else {
@@ -20,9 +20,6 @@ export class PopupWithForm extends Popup {
 
   _getInputValues() {
     const values = [];
-    // const inputs = Array.from(
-    //   this.popupSelector.querySelectorAll(".popup__input")
-    // );
     this.inputList.forEach((item) => {
       values.push(item.value);
     });

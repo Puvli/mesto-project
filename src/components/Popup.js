@@ -9,7 +9,6 @@ export class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-    // console.log('count');
   }
 
   _handleClose(evt) {
@@ -25,14 +24,12 @@ export class Popup {
   }
 
   close() {
-    // console.log("count");
     this.popupSelector.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
   setEventListeners() {
     this.closeButton.addEventListener("click", this.close.bind(this));
-    // document.addEventListener("keydown", this._handleEscClose);
     this.popupSelector.addEventListener("click", this._handleClose.bind(this));
   }
 }

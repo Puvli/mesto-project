@@ -4,7 +4,6 @@ export class Section {
     this.id = id;
     this.template = template;
     this.renderer = renderer;
-    // this.elements = document.querySelector(elements);
     this.elements = elements;
   }
 
@@ -17,16 +16,8 @@ export class Section {
   }
 
   renderItems() {
-    // this.items.forEach((item) => {
-    // this.renderer.call(this, item, id, templateSelector);
-    // const mas = this.renderer;
-    // for (let i = 0; i < mas.length; i++) {
-    this.renderer.forEach((item) => {
-      // this.elements.prepend(item);
-      this.addItem(item);
-    });
-    // this.elements.prepend(mas[i]);
-    // }
-    // });
+    this.items.forEach((item) => {
+      this.addItem(this.renderer.call(this, item, this.id, this.template));
+    })
   }
 }
