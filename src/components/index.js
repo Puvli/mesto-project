@@ -99,10 +99,8 @@ function handleProfileFormSubmit(evt, arr, cls) {
 }
 
 function handleAvatarForm(event, arr, cls) {
-function handleAvatarForm(event, arr, cls) {
   event.preventDefault();
   cls.renderLoading(true);
-  const link = arr[0];
   cls.renderLoading(true);
   const link = arr[0];
 
@@ -123,11 +121,6 @@ function handleAvatarForm(event, arr, cls) {
 
 function handleCardFormSubmit(evt, arr, cls) {
   evt.preventDefault();
-  const itemNewName = arr[0];
-  const itemNewLink = arr[1];
-
-  cls.renderLoading(true);
-
   const itemNewName = arr[0];
   const itemNewLink = arr[1];
 
